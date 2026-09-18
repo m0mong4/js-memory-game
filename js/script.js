@@ -8,8 +8,6 @@ for (let i = 0; i < 8; i++) {
   images.push(url);
 }
 
-console.log(images);
-
 let cards = [...images, ...images];
 
 function shuffle(array){
@@ -20,4 +18,19 @@ function shuffle(array){
     return array;
 }
 
-cards = shuffle(cards);
+function initGame(){
+    cards = shuffle(cards);
+
+    const gameBoard = document.getElementById('game-board');
+
+    cards.forEach((imgUrl) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.value = imgUrl;
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        gameBoard.appendChild(card);
+    });
+}
+
+initGame();
