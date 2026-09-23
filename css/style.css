@@ -7,7 +7,7 @@
 .card{
     width:150px;
     height:150px;
-    background-color: antiquewhite;
+    background-color: rgb(115, 114, 112);
     cursor:pointer;
 }
 
@@ -19,4 +19,77 @@
 
 #restart{
     display: block; 
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    text-align: center;
+    color: antiquewhite;
+    font-family: monospace;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 60px; 
+  background: #000000;
+  background: radial-gradient(circle,rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.card:hover {
+    background-color: #e1d6ca;
+}
+
+
+
+#restart {
+  --b: 3px;  
+  --s: .45em; 
+  --color: #c2c0b4;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#ddd7d700 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #f7f4f000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: monospace;
+}
+
+#restart:hover,
+#restart:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+#restart:active {
+  background: var(--color);
+  color: #fff;
+}
+
+#result{
+    font-family: monospace;
+    color: #c2c0b4;
+}
+
+#timer-display{
+    font-family: monospace;
+    color: #c2c0b4;
 }
