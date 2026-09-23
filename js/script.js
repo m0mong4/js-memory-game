@@ -1,8 +1,15 @@
-firstCard =null
-secondCard=null
-lockBoard =false
-moves=0
-matchedCount =0 
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let moves = 0;
+let matchedCount = 0;
+let seconds = 0;
+let timerInterval = null;
+
+const gameBoard = document.getElementById('game-board');
+const timerDisplay = document.getElementById('timer-display');
+const resultDisplay = document.getElementById('result');
+const restartButton = document.getElementById('restart');
 
 const dimension = 150;
 const imgStart = Math.floor(Math.random() * 100) + 1;
@@ -26,9 +33,23 @@ function shuffle(array){
 }
 
 function initGame(){
-    cards = shuffle(cards);
+    gameBoard.innerHTML = '';
 
-    const gameBoard = document.getElementById('game-board');
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+    moves = 0;
+    matchedCount = 0;
+    seconds = 0;
+
+    clearInterval(timerInterval);
+    timerInterval = null;
+
+  
+    timerDisplay.textContent = formatTime(seconds);
+    resultDisplay.textContent = '';
+
+    cards = shuffle(cards);
 
     cards.forEach((imgUrl) => {
         const card = document.createElement('div');
@@ -39,6 +60,7 @@ function initGame(){
         card.addEventListener('click', () => handleCardClick(card));
         gameBoard.appendChild(card);
     });
+    startTimer();
 }
 
 function handleCardClick(card){
@@ -63,6 +85,7 @@ function checkMatch(){
         firstCard = null;
         secondCard= null;
         lockBoard = false;
+        checkVictory();
     } else {
         setTimeout(() => {
             firstCard.innerHTML = '';
@@ -73,5 +96,29 @@ function checkMatch(){
         }, 800);
     }
 }
+
+function formatTime(sec){
+    const minutes=Math.floor(sec/60);
+    const secondesrestantes=sec%60;
+    const mm=String(minutes).padStart (2,'0');
+    const ss=String(secondesrestantes).padStart (2,'0');
+
+    return `${mm}:${ss}`;
+}
+
+function startTimer(){
+    timerInterval=setInterval(() => { 
+        seconds++
+        timerDisplay.textContent=formatTime(seconds)
+     }, 1000);
+}
+
+function checkVictory(){
+    if( matchedCount === cards.length/ 2){
+        clearInterval(timerInterval);
+        resultDisplay.textContent=`Bravo ! Partie terminée en ${moves} coups et ${formatTime(seconds)}.`;
+    }
+}
+
 
 initGame();
