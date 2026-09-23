@@ -41,7 +41,7 @@ function initGame(){
     });
 }
 
-function andleCardClick(card){
+function handleCardClick(card){
     if (lockBoard) return;
     if (card===firstCard) return;
     if (card.classList.contains('matched')) return;
@@ -51,7 +51,7 @@ function andleCardClick(card){
     }
     secondCard=card
     lockBoard=true 
-    move++;
+    moves++;
     checkMatch();
 }
 
