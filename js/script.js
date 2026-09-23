@@ -62,15 +62,24 @@ function initGame(){
     });
     startTimer();
 }
+restartButton.addEventListener('click', initGame);
+
+function revealCard(card) {
+    const img = document.createElement('img');
+    img.src = card.dataset.value;
+    card.appendChild(img);
+}
 
 function handleCardClick(card){
     if (lockBoard) return;
     if (card===firstCard) return;
     if (card.classList.contains('matched')) return;
+    revealCard(card);
     if(firstCard===null){
         firstCard=card
         return;
     }
+    
     secondCard=card
     lockBoard=true 
     moves++;
@@ -117,6 +126,7 @@ function checkVictory(){
     if( matchedCount === cards.length/ 2){
         clearInterval(timerInterval);
         resultDisplay.textContent=`Bravo ! Partie terminée en ${moves} coups et ${formatTime(seconds)}.`;
+        
     }
 }
 
