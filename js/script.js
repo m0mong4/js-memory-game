@@ -58,6 +58,7 @@ function initGame(){
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
         card.addEventListener('click', () => handleCardClick(card));
+        card.setAttribute('aria-label', 'Carte memory face cachée');
         gameBoard.appendChild(card);
     });
     startTimer();
@@ -67,6 +68,9 @@ restartButton.addEventListener('click', initGame);
 function revealCard(card) {
     const img = document.createElement('img');
     img.src = card.dataset.value;
+    img.width = dimension;   
+    img.height = dimension;  
+    img.alt = 'Carte memory'; 
     card.appendChild(img);
 }
 
@@ -96,9 +100,13 @@ function checkMatch(){
         lockBoard = false;
         checkVictory();
     } else {
+        firstCard.classList.add('shake');    
+        secondCard.classList.add('shake');
         setTimeout(() => {
             firstCard.innerHTML = '';
             secondCard.innerHTML = '';
+            firstCard.classList.remove('shake');  
+            secondCard.classList.remove('shake');
             firstCard = null;
             secondCard = null;
             lockBoard =false;
